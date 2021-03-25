@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if request.auth.uid != null;
+      allow create;
+      allow update: if request.auth.uid == uid;
+      allow delete: if request.auth.uid == uid;
+    }
+
+    match /products/ {productId} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    }
+  }
+}
+//Firebase Authでのルールを設定している
+//readは、uidがあればOK  update,deleteは『uid』が正しい（一致している）時じゃないと情報の更新や削除を許可しない
+//一旦、この『Firebase.rulse』のみ適用するために、ターミナルでdeployする
+// ➡︎ firebase deploy --only firestore:rules
