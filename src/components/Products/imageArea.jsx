@@ -22,9 +22,9 @@ const ImageArea = (props) => {
     if (!ret) {
       return false
     } else {
-      const newImages = props.images.filter(image => image.id != id)
+      const newImages = props.images.filter(image => image.id !== id)
       props.setImages(newImages);
-      return storage.ref("images").child(id).delete();
+      return storage.ref("image").child(id).delete();
     }
   }, [props.images])
 
@@ -37,7 +37,7 @@ const ImageArea = (props) => {
     const fileName = Array.from(crypto.getRandomValues(new Uint32Array(N))).map((n) => S[n%S.length]).join("")
 
     //storageの中に、ref("image")で「imageカラム」に、上記で生成したランダムなID＝『fileName』を付与した画像データを登録して、定数uploadRefにいれる
-    const uploadRef = storage.ref("image").child(fileName);
+    const uploadRef = storage.ref("images").child(fileName);
     const uploadTask = uploadRef.put(blob);
 
 // このタイミングで「Cloud Stroage」に保存完了 改めて次は、保存された画像の保存先のURLを取得 ➡︎ 生成したランダムなIDと画像を紐付けて、画像以外の商品情報が保存されている「Cloud Firestore」へ保存させる
