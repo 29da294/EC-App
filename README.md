@@ -22,4 +22,4 @@ We will continue to add.
   - 商品画像の登録・プレビュー・削除
   - 商品登録内容の追加・修正編集
   - 商品のサイズ、在庫数量の変更機能
-  ![ProductDev.]"https://user-images.githubusercontent.com/80564526/112759418-d7992c80-902d-11eb-86fe-86745dd0d5e5.png"
+  ![ProductDev.](https://user-images.githubusercontent.com/80564526/112759418-d7992c80-902d-11eb-86fe-86745dd0d5e5.png)
