@@ -29,7 +29,5 @@ We will continue to add.
   - 商品のサイズ、在庫数量の変更機能
   ![ProductDev.](https://user-images.githubusercontent.com/80564526/112759418-d7992c80-902d-11eb-86fe-86745dd0d5e5.png)
   ![sizeEdit_demo](https://user-images.githubusercontent.com/80564526/112784195-f8906a80-908b-11eb-9bc6-326f42165888.gif)
-  
   - 商品一覧表示（トップページ）
-  ![list_ver1](https://user-images.githubusercontent.com/80564526/112945105-cc99e580-916e-11eb-87fb-8984110ff4ae.png)
   ![list_demo](https://user-images.githubusercontent.com/80564526/112944484-dc64fa00-916d-11eb-8488-cce53c25ccd8.gif)
