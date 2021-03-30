@@ -45,7 +45,7 @@ const SetSizeArea = (props) => {
   //(index === props.size.length) ➡︎ 既存の列に新しく列を追加して、新しいデータにindexナンバーをふるためのロジック 現時点での登録されているデータの総列数がindexに入っている ➡︎新規登録するデータを、登録するときのロジック だから、setIndex(index + 1)で、どんどん新しいindexのナンバーを生成している
   //よって、elseの方の分岐ロジックには、『既に Sサイズ 数量10 など、既に登録されているデータを修正する＝editSize関数を実行した時の列を追加するのではなく、既存の列を修正する場合のロジック』
   const addSize = (index, size, quantity) => {
-    if (size === "" || quantity === 0) {
+    if (size === "" || quantity < 0) {
       return false
     } else {
       if (index === props.sizes.length) {

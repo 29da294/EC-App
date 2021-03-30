@@ -10,10 +10,9 @@ import {
 //●connected-react-router ReduxのStoreでルーティングを管理するものをimport
 import { connectRouter, routerMiddleware } from "connected-react-router"
 
-//『reducers』のimportをしている *前回作成した
-//import { ProductsReducer } from "../products/reducers";
+//『reducers』をimportしている
 import { UsersReducer } from "../users/reducers";
-import { ProductsResucer, ProductsReducer } from "../products/reducers";
+import { ProductsReducer } from "../products/reducers";
 
 //『redux-thunk』を使うためにimportしている
 import thunk from "redux-thunk";
@@ -21,7 +20,7 @@ import thunk from "redux-thunk";
 
 //createStore関数を定義している
 //名前付き関数＝functionとして今回は定義する（アロー関数でも定義はできる）
-//combineReducers()とは？ ❶：分割（バラバラの）Reducersをまとめてくれる ❷：stateのカテゴリごと（今回だと「productsやusersのようなカテゴリごと」）にまとめてくれる  ❶、❷のまとめると、『products: ProductsReducer, users: UsersReducer』のように『「productsというstate」に対応する「Reducerは、ProductsReducer」』『「usersというstate」に対応する「Reducerは、usersReducers」』というように、『stateのカテゴリ毎に、 Reducersをまとめてくれている』
+//combineReducers()とは？ ❶：分割（バラバラの）Reducersをまとめてくれる ❷：stateのカテゴリごと（今回だと「productsやusersのようなカテゴリごと」）にまとめてくれる  ❶、❷をまとめると、『products: ProductsReducer, users: UsersReducer』のように『「productsというstate」に対応する「Reducerは、ProductsReducer」』『「usersというstate」に対応する「Reducerは、usersReducers」』というように、『stateのカテゴリ毎に、 Reducersをまとめてくれている』
 //❸ 最終的に『オブジェクトをreturnする』 returnするものは「stateのデータ構造を持ったもの ＝ initialSate.jsで定義したものと同じ形式」を返す
 // {
 //   products: {
@@ -38,7 +37,6 @@ import thunk from "redux-thunk";
 export default function createStore(history) {
   return reduxCreateStore(
     combineReducers({
-      //products: ProductsReducer,
       router: connectRouter(history),
       users: UsersReducer,
       products: ProductsReducer

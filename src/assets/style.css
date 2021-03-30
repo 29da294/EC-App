@@ -66,6 +66,7 @@
     flex-flow: column;
 }
 
+/* 画像3枚横並びになったら折り返して次々に下段へ表示させる */
 .p-grid__row {
     display: flex;
     flex-flow: row wrap;
@@ -160,6 +161,7 @@
     }
 
     /*********** Section ***********/
+    /* 表示一覧画像3枚の表示分の横幅を設定する ＝ 1024px */
     .c-section-wrapin {
         max-width: 1024px;
     }
@@ -171,4 +173,3 @@
         height: 48px
     }
 }
-
