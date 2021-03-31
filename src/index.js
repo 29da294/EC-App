@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import createStore from "./reducks/store/store"
 import { ConnectedRouter } from "connected-react-router";
 import * as History from "history"
+import { MuiThemeProvider } from "@material-ui/core";
+import { theme } from "./assets/theme";
 
 //{Provider} と createStore()関数をimportする
 
@@ -21,6 +23,8 @@ import * as History from "history"
 //❸ 以上のことから、<Provider store={store}>として、createStore()関数で作成したデータを入れた、 『定数const store』を『store={store}』として、『storeというpropsの中にstoreのデータ』を『Provider に渡している』 これによって、<App/>コンポーネントでも『store のデータを扱えるようになる！』
 //export const store = createStore();
 
+//<MuiThemeProvider theme={theme}> ➡︎ Matrial-uiの『themeスタイル』を使う時にラッピングしないと使えないため括る
+
 
 //『store.js』で引数として受け取っていた、『history』をここで生成する！
 const history = History.createBrowserHistory();
@@ -29,7 +33,9 @@ export const store = createStore(history);
 ReactDOM.render(
   < Provider store={store} >
     <ConnectedRouter history={history}>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </ConnectedRouter>
   </ Provider>,
   document.getElementById('root')

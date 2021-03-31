@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { Home, SignIn, SignUp, Reset, ProductEdit, ProductList } from "./templates";
+import { Home, SignIn, SignUp, Reset, ProductDetail, ProductEdit, ProductList } from "./templates";
 import Auth from "./Auth"
 
 //Routerコンポーネントの基本型
@@ -23,6 +23,7 @@ const Router = () => {
 
     <Auth>
         <Route exact path={"(/)?"} component={ProductList} />
+        <Route path={"/product/:id"} component={ProductDetail} />
         <Route path={"/product/edit(/:id)?"} component={ProductEdit} />
     </Auth>
     </Switch>
