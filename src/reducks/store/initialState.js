@@ -5,7 +5,10 @@ export const initialState = {
     list: []
   },
   users: {
+    carts: [],
+    favorites: [],
     isSignedIn: false,
+    orders: [],
     role: "",
     uid: "",
     username: ""

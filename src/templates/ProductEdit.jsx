@@ -11,21 +11,19 @@ const ProductEdit = () => {
 //split("product/edit")[1]で、[1]をつけるのか？ ➡︎       /product/edit/(保存済みの products の id（例:abcdefgh）) だとすると ➡︎ splitで分割して出力すると「”/”, id(例:abcdefgh) 」となるため、2つ目 ＝[1]を指定する
 
   let id = window.location.pathname.split("/product/edit")[1];
-  console.log("Before split", id);
 
   if (id !== "") {
     id = id.split("/")[1]
-    console.log("After split", id);
   }
 
-  const
-    [name, setName] = useState(""),
-    [description, setDescription] = useState(""),
-    [category, setCategory] = useState(""),
-    [gender, setGender] = useState(""),
-    [price, setPrice] = useState(""),
-    [images, setImages] = useState([]),
-    [sizes, setSizes] = useState([]);
+  const [name, setName] = useState(""),
+        [description, setDescription] = useState(""),
+        [category, setCategory] = useState(""),
+        [categories, setCategories] = useState([]),
+        [gender, setGender] = useState(""),
+        [price, setPrice] = useState(""),
+        [images, setImages] = useState([]),
+        [sizes, setSizes] = useState([]);
 
   //set〜系に値をセットしていく関数 onClick や onChangeなどのイベントのporpsに渡す経由で行う
   const inputName = useCallback((event) => {
@@ -40,21 +38,23 @@ const ProductEdit = () => {
     setPrice(event.target.value)
   }, [setPrice])
 
-  const categories = [
-    { id: "top", name: "トップス" },
-    { id: "shirt", name: "シャツ" },
-    { id: "bottom", name: "ボトム" },
-    { id: "knit", name: "ニット" },
-    { id: "outer", name: "アウター" },
-    { id: "onepice", name: "ワンピース" },
-    { id: "skirt", name: "スカート" },
-    { id: "bag&luggage", name: "バッグ＆ラゲッジ" },
-    { id: "shoes", name: "シューズ" },
-    { id: "underwear", name: "肌着" },
-    { id: "watch", name: "時計" },
-    { id: "wallet", name: "財布" },
-    { id: "accessories", name: "アクセサリー" },
-  ]
+
+  // const categories = [
+  //   { id: "top", name: "トップス" },
+  //   { id: "shirt", name: "シャツ" },
+  //   { id: "bottom", name: "ボトム" },
+  //   { id: "knit", name: "ニット" },
+  //   { id: "outer", name: "アウター" },
+  //   { id: "onepice", name: "ワンピース" },
+  //   { id: "skirt", name: "スカート" },
+  //   { id: "bag&luggage", name: "バッグ＆ラゲッジ" },
+  //   { id: "shoes", name: "シューズ" },
+  //   { id: "underwear", name: "肌着" },
+  //   { id: "watch", name: "時計" },
+  //   { id: "wallet", name: "財布" },
+  //   { id: "accessories", name: "アクセサリー" },
+  //   { id: "hat", name: "帽子" }
+  // ]
 
   const genders = [
     { id: "all", name: "すべて" },
@@ -62,6 +62,24 @@ const ProductEdit = () => {
     { id: "female", name: "レディース" },
     { id: "child", name: "キッズ" }
   ]
+
+  //DBにcategoriesの情報を移動させ、useEffect()内で取得
+  //forEach 配列に含まれる要素を順番に取り出し、記述したコールバック関数渡して処理する
+  //asc 昇順0001〜並べる
+  useEffect(() => {
+    db.collection("categories").orderBy("order", "asc").get()
+      .then(snapshots => {
+        const list = [];
+        snapshots.forEach(snapshot => {
+          const data = snapshot.data();
+          list.push({
+            id: data.id,
+            name: data.name
+          })
+        })
+        setCategories(list)
+      })
+  }, [])
 
   //第2引数に[id]をとることで、URLのidが切り替わった時のみ、Cloud Firestoreから切り替わったidのデータを取得するようにすることで効率的、かつ負担が少なく表示されるようになる
   useEffect(() => {
@@ -72,8 +90,8 @@ const ProductEdit = () => {
           setImages(data.images);
           setName(data.name);
           setDescription(data.description);
-          setGender(data.gender);
           setCategory(data.category);
+          setGender(data.gender);
           setPrice(data.price);
           setSizes(data.sizes)
         })
@@ -92,10 +110,10 @@ const ProductEdit = () => {
             fullWidth={true} label={"商品説明"} multiline={true} reqired={true} onChange={inputDescription} rows={5} value={description} type={"text"}
           />
         <SelectBox
-          label={"カテゴリー"} required={true} options={categories} select={setCategory}
+          label={"カテゴリー"} required={true} options={categories} select={setCategory} value={category}
         />
         <SelectBox
-          label={"性別"} required={true} options={genders} select={setGender}
+          label={"性別"} required={true} options={genders} select={setGender} value={gender}
         />
         <TextInput
             fullWidth={true} label={"価格"} multiline={false} reqired={true} onChange={inputPrice} rows={1} value={price} type={"number"}

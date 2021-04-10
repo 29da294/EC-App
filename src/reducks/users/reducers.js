@@ -6,6 +6,21 @@ import initialState from "../store/initialState";
 
 export const UsersReducer = (state = initialState.users, action) => {
   switch (action.type) {
+    case Actions.FETCH_ORDERS_HISTORY:
+      return {
+        ...state,
+        orders: [...action.payload]
+      }
+    case Actions.FETCH_PRODUCTS_IN_CART:
+      return {
+        ...state,
+        carts: [...action.payload] //cart:[] 配列なので[]とする
+      }
+    case Actions.FETCH_PRODUCTS_IN_FAVORITE:
+      return {
+        ...state,
+        favorites: [...action.payload]
+      }
     case Actions.SIGN_IN:
       return {
         ...state,
@@ -34,5 +49,5 @@ export const UsersReducer = (state = initialState.users, action) => {
 //★【ポイント】：『Reducers』は『stores』の状態を『⚠︎上書きしてしまう！』という点に注意すること！！ この時、⚠︎『指定されていないフィールドは消えてしまう』ことにまたまた注意すること！！
 //但し、『...state,』を記述しているため、例えば、initialStateの中身を『icon: "", isSingedIn: false, uid: "", username: ""』指定していて、スプレット構文で展開しておく  更に『...action.payload』でデータの中身を展開しておく  ★この時、『Reducerは、『state と action.payloadで被ったデータの項目があったら、』後から記述した内容のものに、更新していくルールがある』ので、この例の場合、差分で残った『state の icon=""』は消えずに、このまま項目として残るように上手く処理されるのである！
 //★つまり、展開して残るデータ項目は『icon: "", isSignedIn: action.payload.uid, uid: action.payload.uid, username: action.payload.username』となり、『iconの項目はそのまま残る！』
-//★つまり、『stateにはある！』けど、『actions.js = action.payload には無いよ〜！』というもの、すなわち、『stateにはあるものを残すせる』ようになる！
+//★つまり、『stateにはある！』けど、『actions.js = action.payload には無い！』というもの、すなわち、『stateにはあるものを残せる』ようになる！
 //これが、わざわざ初期値を引数に渡して書いている理由である ➡︎『...state,...action.payload』と書くことで上書きの削除（更新されてしまうこと）を防ぎながら『storeの中の状態も削除せずに』変更を行える！

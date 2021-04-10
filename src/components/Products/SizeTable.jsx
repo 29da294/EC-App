@@ -17,7 +17,9 @@ const useStyles = makeStyles({
   }
 })
 
+//sizes ➡︎ [SetSizeArea.jsx]size,quantity,index
 //componet="th" scpoe="row" ➡︎ th見出しを横セル方向に適用
+//ショッピングカートアイコンのonClickイベントに、先ほど親コンポーネントで定義したaddProducts()を設定
 const SizeTable = (props) => {
   const classes = useStyles();
 
@@ -36,7 +38,7 @@ const SizeTable = (props) => {
                 <TableCell>残り{size.quantity}点</TableCell>
                 <TableCell className={classes.iconCell}>
                   {size.quantity > 0 ? (
-                    <IconButton>
+                    <IconButton onClick={() => props.addProduct(size.size)} >
                       <ShoppingCartIcon />
                     </IconButton>
                   ) : (
@@ -44,7 +46,7 @@ const SizeTable = (props) => {
                     )}
                 </TableCell>
                 <TableCell>
-                  <IconButton>
+                  <IconButton onClick={() => props.addFavorite(size)} >
                     <FavoriteBorderIcon />
                   </IconButton>
                 </TableCell>

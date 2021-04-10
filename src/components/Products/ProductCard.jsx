@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import NoImage from "../../assets/img/src/no_image.png";
 import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
-import IconBotton from "@material-ui/core/IconButton";
+import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -82,9 +82,9 @@ const ProductCard = (props) => {
             ¥{price}
           </Typography>
         </div>
-        <IconBotton onClick={handleClick} >
+        <IconButton onClick={handleClick} >
           <MoreVertIcon />
-        </IconBotton>
+        </IconButton>
         <Menu
           anchorEl={anchorEl}
           keepMounted
@@ -93,7 +93,7 @@ const ProductCard = (props) => {
         >
         <MenuItem
             onClick={() => {
-              dispatch(push("/product/edit/" + props.id))
+              dispatch(push("/product/edit/"+props.id))
               handleClose()
           }}
           >

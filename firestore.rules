@@ -4,14 +4,32 @@ service cloud.firestore {
     match /users/{userId} {
       allow read: if request.auth.uid != null;
       allow create;
-      allow update: if request.auth.uid == uid;
-      allow delete: if request.auth.uid == uid;
+      allow update: if request.auth.uid == userId;
+      allow delete: if request.auth.uid == userId;
+
+      match /carts/{catId} {
+        allow read, write: if request.auth.uid == userId;
+      }
+
+      match /favorites/{favoriteId} {
+        allow read, write: if request.auth.uid == userId;
+      }
+
+      match /orders/{orderId} {
+        allow read, write: if request.auth.uid == userId;
+      }
     }
 
-    match /products/ {productId} {
+    match /products/{productId} {
       allow read: if request.auth.uid != null;
       allow write: if request.auth.uid != null;
     }
+
+    match /categories/{categoryId} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    }
+
   }
 }
 //Firebase Authでのルールを設定している

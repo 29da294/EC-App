@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 
-//variant="contained" ➡︎ Matrial UI のボタンのデザイン設定 ➡︎ ボタン内を塗りつぶす
+//variant="contained" ➡︎ Material UI のボタンのデザイン設定 ➡︎ ボタン内を塗りつぶす
 //onClick={() => props.onClick()} ➡︎ 各コンポーネントごとで行うonClick()イベントを受け取れる
 //props.label ➡︎ ボタンに表示させたい文字を受け取れる
 const PrimaryButton = (props) => {

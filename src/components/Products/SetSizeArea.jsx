@@ -89,8 +89,10 @@ return (
           <TableRow>
             <TableCell>サイズ</TableCell>
             <TableCell>数量</TableCell>
-            <TableCell className={classes.iconCell} />
-            <TableCell className={classes.iconCell} />
+            <TableCell>編集</TableCell>
+            <TableCell>削除</TableCell>
+            {/* <TableCell className={classes.iconCell} /> */}
+            {/* <TableCell className={classes.iconCell} /> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -122,9 +124,9 @@ return (
           fullWidth={false} label={"数量"} multiline={false} requires={true} onChange={inputQuantity} rows={1} value={quantity} type={"number"}
         />
       </div>
-      {/* onChangeイベント ➡︎ addSizeで編集した値を決定するクリックを押した時 */}
+      {/* onChangeイベント() ➡︎ addSizeで編集した値を決定する時にクリックするボタン */}
       <IconButton className={classes.checkIcon} onClick={() => addSize(index, size, quantity)} >
-        <CheckCircleIcon/>
+        追加する<CheckCircleIcon />
       </IconButton>
     </TableContainer>
   </div>

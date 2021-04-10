@@ -1,7 +1,68 @@
 import React from "react";
-import { signInAction, signOutAction } from "./actions";
+import { fetchProductsInCartAction, fetchProductsInFavoriteAction, fetchOrdersHistoryAction, signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
-import { db, auth, FirebaseTimestamp } from "../../firebase/index"
+import { auth, db, FirebaseTimestamp } from "../../firebase/index"
+import { useSelector } from "react-redux";
+
+// getState ➡︎ 現在のStore の state 全部を呼び出している ➡︎ だから store.js の getState.users:の(Firestoreのusersカラムの).uidというユーザーIDを取得できる
+// (addedProduct) ➡︎ ProductDetail.jsx の addProduct() => {dispatch(addProductsToCart({各種データ}))} の{各種データ}が入ってくる
+//★ db.collection("users").doc("uid").collection("cart").doc(); ➡︎ これで、"users"カラムに "cart"サブカラムを作成できる ➡︎ 最後に空のdoc()にあえてすることで、次の addedProduct["cartId"] = cartRef.id;で、["cartId"]というデータフィールド（カラム）も追加して、FireStoreのデータ表の作成完了させている
+//引数（addedProduct）➡︎ 定数addProductのこと(ProductDetail.jsx) ここでaddProductsToCart（）を使っている そこでDBへ登録したい項目を{}オブジェクト型で生成している ➡︎ ここに更に”cartId”カラムを追加で生成している＝addedProduct["cartId"]カラムを作って = cartRef.id;idを生成してる
+//最後にcartRef.set(addedProduct)で 先ほど生成したcartIdもプラスした、引数で受け取った商品データたちをDBへ登録している awaitでDBへの保存を待って、カートの確認画面へ遷移するようにして反映のミス（遅延を）防いでいる
+export const addProductsToCart = (addedProduct) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const cartRef = db.collection("users").doc(uid).collection("carts").doc();
+    addedProduct["cartId"] = cartRef.id;
+    await cartRef.set(addedProduct);
+    dispatch(push("/cart"));
+  }
+}
+
+export const addProductsToFavorite = (addedProduct) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const favoriteRef = db.collection("users").doc(uid).collection("favorites").doc();
+    addedProduct["favoriteId"] = favoriteRef.id;
+    await favoriteRef.set(addedProduct);
+    dispatch(push("/user/favorite"));
+  }
+};
+
+
+//fetchOrdersHistory()を実行し、DB(Store)上のordersサブコレクションを取得してStoreに保存する関数
+export const fetchOrdersHistory = () => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const list = [];
+
+    db.collection("users").doc(uid).collection("orders")
+      .orderBy("updated_at", "desc")
+      .get()
+      .then(snapshots => {
+        snapshots.forEach(snapshot => {
+          const data = snapshot.data();
+          list.push(data);
+        });
+        dispatch(fetchOrdersHistoryAction(list));
+      })
+  }
+}
+
+
+//ただactions.js を飛び出すだけの関数 ＝ Storeを更新するための関数 products ➡︎ productsInCart(HederMenu.jsx)＝ Storeから取得したカートに入っている商品数
+export const fetchProductsInCart = (products) => {
+  return async (dispatch) => {
+    dispatch(fetchProductsInCartAction(products))
+  }
+}
+
+export const fetchProductsInFavorite = (products) => {
+  return async (dispatch) => {
+    dispatch(fetchProductsInFavoriteAction(products))
+  }
+}
+
 
 //『dispatch』とは？？ ➡︎ ActionをStoreへ『dispatch（送信、届ける）』すると、Storeのstateが変更される。stateの変更は必ずActionを経由して行う
 //Action ➡︎ Containerからの要求を受け、変更をさらに次へ依頼する。Fluxフローにおいては窓口の役割。変更を依頼すること自体は、★『dispatch』と言う。★Container「countを + 1したいらしいです」★Action「分かりました。担当につなぎます（dispatch）」
@@ -53,7 +114,6 @@ export const listenAuthState = () => {
 // 『stateの中の、users（というkey ＝ usersはオブジェクトである）の中の、isSignedInというkeyの中のデータを
 // 取得することができる！
 // ➡︎ isSignedInというのは、『ユーザーの、ログイン情報が入っている！』
-
 
 export const signIn = (email, password) => {
   return async (dispatch) => {

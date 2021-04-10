@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { Home, SignIn, SignUp, Reset, ProductDetail, ProductEdit, ProductList } from "./templates";
+import { CartList, FavoriteList, SignIn, SignUp, Reset, OrderConfirm, OrderHistory, ProductDetail, ProductEdit, ProductList, OrderComplete, UserMyPage } from "./templates";
 import Auth from "./Auth"
+import { Favorite } from "@material-ui/icons";
 
 //Routerコンポーネントの基本型
 //<Swith>と『exact』の組み合わせ（ラップ）で『完全一致』でリンクに飛ぶ設定となる
@@ -23,8 +24,16 @@ const Router = () => {
 
     <Auth>
         <Route exact path={"(/)?"} component={ProductList} />
-        <Route path={"/product/:id"} component={ProductDetail} />
+        <Route exact path={"/cart/"} component={CartList} />
+        
+        <Route exact path={"/order/completes"} component={OrderComplete} />
+        <Route exact path={"/order/confirm"} component={OrderConfirm} />
+        <Route exact path={"/order/history"} component={OrderHistory} />
+        <Route exact path={"/product/:id"} component={ProductDetail} />
         <Route path={"/product/edit(/:id)?"} component={ProductEdit} />
+
+        <Route exact path={"/user/favorite"} component={FavoriteList} />
+        <Route exact path={"/user/mypage"} component={UserMyPage} />
     </Auth>
     </Switch>
   )

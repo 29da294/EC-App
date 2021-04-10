@@ -60,6 +60,7 @@
     text-align: center;
 }
 
+/* ページ真ん中 かつ 縦方向に文章のソース順に並べる */
 .p-grid__column {
     align-items: center;
     display: flex;
