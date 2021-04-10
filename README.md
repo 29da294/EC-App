@@ -5,14 +5,14 @@
   - 店舗 ： 商品の出品・変更、在庫管理
   - ユーザー ： 商品閲覧、カート・お気に入りリストへの追加、注文履歴の確認
 
-JavaScript,React,Redux,Firebaseを用いて開発しました。
+JavaScript React Redux Firebase を用いて開発しました。
 
 ## デモアプリURL
 [URL]: 
 
-**デモ用アカウント**
-メールアドレス: **test@gmail.com**
-パスワード: **password**
+**デモ用アカウント**  
+メールアドレス: **test@gmail.com**  
+パスワード: **password**  
 上記のアドレスとパスワードから操作していただけます。
 
 ## 使用技術（Use technology）
