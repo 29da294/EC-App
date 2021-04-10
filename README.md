@@ -1,4 +1,6 @@
 # EC-CITY
+![TOP_LOGO](https://user-images.githubusercontent.com/80564526/114260545-88310400-9a10-11eb-97ee-28beba32a773.png)
+
 
 ファッション系ECアプリです。アパレルのカテゴリー（服、靴、バッグ等）を出品することを想定しています。
 * 店舗：ユーザー ＝ 1 ： ｎ
