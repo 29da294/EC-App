@@ -9,7 +9,7 @@
 
 JavaScript React Redux Firebase を用いて開発しました。
 
-## デモアプリURL
+# デモアプリURL
 [URL]: 
 
 **デモ用アカウント**  
