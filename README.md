@@ -10,8 +10,8 @@
 JavaScript React Redux Firebase を用いて開発しました。
 
 # デモアプリURL
-[URL]:https://ec-app-75b81.web.app/
-
+[URL]: https://ec-app-75b81.web.app/  
+  
 **デモ用アカウント**  
 メールアドレス: **test@gmail.com**  
 パスワード: **test123**  
