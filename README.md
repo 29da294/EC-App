@@ -13,7 +13,7 @@ JavaScript React Redux Firebase を用いて開発しました。
 [https://ec-app-75b81.web.app/](https://ec-app-75b81.web.app/)  
   
 **デモ用アカウント**  
-メールアドレス: **test@gmail.com**  
+メールアドレス: **`test@gmail.com`**  
 パスワード: **test123**  
   
 ◎上記の「アドレス」と「パスワード」が予め入力されておりますので、**そのまま「SIGN IN」ボタンを押して**ご閲覧ください。  
