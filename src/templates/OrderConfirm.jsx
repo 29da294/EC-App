@@ -67,6 +67,9 @@ const OrderConfirm = () => {
           <TextDetail label={"商品合計"} value={"¥" + subtotal.toLocaleString()} />
           <TextDetail label={"消費税"} value={"¥" + tax.toLocaleString()} />
           <TextDetail label={"送料"} value={"¥" + shippingFee.toLocaleString()} />
+          {subtotal >= 10000 && (
+          <TextDetail value={"＊商品合計1万円以上で送料無料＊"} />
+          )}
           <Divider />
           <div className="module-spacer--extra-small" />
           <TextDetail label={"合計(税込)"} value={"¥" + total.toLocaleString()} />

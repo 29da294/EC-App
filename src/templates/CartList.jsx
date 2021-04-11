@@ -35,13 +35,17 @@ const CartList = () => {
     <section className="c-section-wrapin" >
       <h2 className="u-text__headline">カート</h2>
       <List className={classes.root}>
-        {productsInCart.length > 0 && (
+        {productsInCart.length > 0 ? (
           productsInCart.map(product => <CartListItem product={product} key={product.cartId} />)
+        ) : (
+          <div className="alert-color-red">カート内に商品がありません</div>
         )}
       </List>
       <div className="module-spacer--medium" />
       <div className="p-grid__column" >
+        {productsInCart.length > 0 && (
         <PrimaryButton label={"レジへ進む"} onClick={goToOrder} />
+        )}
         <div className="module-spacer--extra-extra-small" />
         <GreyButton label={"お買い物を続ける"} onClick={backToTop} />
       </div>

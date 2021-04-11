@@ -115,7 +115,7 @@
 }
 
 .l-footer > a {
-    color: #444;
+    color:navy;
     font-size: .9rem;
     margin-right: 1rem;
 }
@@ -168,6 +168,11 @@
         height: 32px
     }
 
+
+    /*********** alert-color ***********/
+    .alert-color-red{
+        color:orangered;
+    }
 
     /*********** hover ***********/
     .opacity-hover:hover {
