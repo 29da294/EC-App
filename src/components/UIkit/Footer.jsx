@@ -16,9 +16,7 @@ const Footer = () => {
       </ul>
       <div className="module-spacer--extra-extra-small" />
       <ul className="l-footer">
-        <a className="u-text__link-none" >
           <small>Copyright &copy; 2021 29DA All Rights Reserved</small>
-        </a>
       </ul>
     </footer>
   )

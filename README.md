@@ -9,6 +9,9 @@
 
 JavaScript React Redux Firebase を用いて開発しました。
 
+![EC-CITY-TOP](https://user-images.githubusercontent.com/80564526/114298478-986ce000-9af1-11eb-9bb9-6aa248826ad2.png)
+
+
 # デモアプリURL
 [https://ec-app-75b81.web.app/](https://ec-app-75b81.web.app/)  
   
