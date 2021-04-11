@@ -8,8 +8,8 @@ import { signIn } from "../reducks/users/operations"
 const SignIn = () => {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState(""),
-        [password, setPassword] = useState("")
+  const [email, setEmail] = useState("test@gmail.com"),
+        [password, setPassword] = useState("test123")
 
   // useCallbackでのメモ化 ➡︎ bind(this)の代わり、render()の繰り返しを防ぐ！ event = onChange()イベントで次々に入力されていく文字列を反映しているイベントのこと これで更新さえていく値を更新されるたびに『onChange={inputUsername}として渡して』更新できるようにしている
 
@@ -25,7 +25,6 @@ const SignIn = () => {
     <div className="c-section-container">
       <h2 className="u-text__headline u-text-center">サインイン</h2>
       <div className="module-spacer--medium" />
-      {/* ⬆︎空白を入れるため用のdivタグ */}
       <TextInput
         fullWidth={true} label={"メールアドレス"} multiline={false} required={true} rows={1} value={email} type={"email"} onChange={inputEmail}
       />
@@ -39,8 +38,9 @@ const SignIn = () => {
           onClick={() => dispatch(signIn(email, password))}
         />
         <div className="module-spacer--medium" />
-        <p onClick={() => dispatch(push("/signup"))}>アカウントをまだお持ちでない方はこちら</p>
-        <p onClick={() => dispatch(push("/signin/reset"))}>パスワードをお忘れの方はこちら</p>
+          <button className="opacity-hover-t-blue clear-decoration" onClick={() => dispatch(push("/signup"))}>アカウントをまだお持ちでない方はこちら</button>
+          <div className="module-spacer--extra-small" />
+          <button className="opacity-hover-t-blue clear-decoration" onClick={() => dispatch(push("/signin/reset"))}>パスワードをお忘れの方はこちら</button>
       </div>
     </div>
   )

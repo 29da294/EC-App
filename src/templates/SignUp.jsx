@@ -52,7 +52,7 @@ const SignUp = () => {
           onClick={() => dispatch(signUp(username, email, password, confirmPassword))}
         />
         <div className="module-spacer--medium" />
-        <p onClick={() => dispatch(push("/sigin"))}>既にアカウントをお持ちの方はこちら</p>
+        <button className="opacity-hover-t-blue clear-decoration" onClick={() => dispatch(push("/sigin"))}>既にアカウントをお持ちの方はこちら</button>
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
-// Entry Point ➡︎ templeates/SignUp.jsx
+// Entry Point
+export { default as Footer } from "./Footer";
 export { default as GreyButton } from "./GreyButton";
 export { default as TextDetail } from "./TextDetail";
 export { default as TextInput } from "./TextInput";

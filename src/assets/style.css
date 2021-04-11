@@ -108,6 +108,7 @@
 /*********** Footer ***********/
 .l-footer {
     display: flex;
+    justify-content: center;
     flex-flow: row wrap;
     list-style: none;
     margin: 0 1rem;
@@ -159,6 +160,25 @@
     }
     .module-spacer--small {
         height: 32px
+    }
+
+
+    /*********** hover ***********/
+    .opacity-hover:hover {
+        opacity: 0.5;
+    }
+
+    .opacity-hover-t-blue:hover {
+        opacity: 0.5;
+        color: turquoise;
+    }
+
+
+    /*********** clear-decoration ***********/
+    .clear-decoration {
+        border: none;
+        outline: none;
+        background: transparent;
     }
 
     /*********** Section ***********/
