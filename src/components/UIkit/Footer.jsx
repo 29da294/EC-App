@@ -2,10 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="footer-color">
       <ul className="l-footer">
         <a className="u-text__link-none" href="https://29da294.github.io/MyPage/" target="_blank" rel="noreferrer noopener" >
-          <li className="opacity-hover">運営会社(HPリンク)</li>
+          <li className="opacity-hover-t-blue">運営会社(HPリンク)</li>
         </a>
         <a className="u-text__link-none">
           <li>利用規約</li>

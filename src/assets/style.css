@@ -120,6 +120,12 @@
     margin-right: 1rem;
 }
 
+.footer-color {
+    background-color: #ffd54f;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
 .u-text-small {
     font-size: .9rem;
 }
