@@ -7,6 +7,7 @@ import { ImageSwiper } from "../components/Products/index";
 import { AutorenewTwoTone } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core";
 import { SizeTable } from "../components/Products/index";
+import { getUserId } from "../reducks/users/selectors";
 
 //sm ➡︎ 600px(スマフォサイズ)  auto左右 ➡︎ 中央揃え height,width:320 ➡︎ iPhon SEの画面サイズを基準に合わせる
 const useStyles = makeStyles((theme) => ({
@@ -59,11 +60,14 @@ const ProductDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector(state => state);
+  const uid = getUserId(selector);
   const path = selector.router.location.pathname;
   const id = path.split("/product/")[1];
 
   // useEffect(() => {}) で取得してきたデータ ➡︎ setProduct()を経由して productに入る
   const [product, setProduct] = useState(null);
+  const favoriteList = [];
+  const favorite = [];
 
   // 第二引数 ＝ []が空の時は、マウントとアンマウントの時（コンポーネントが配置された直前と破棄される時）に、第一引数の関数＝productデータの取得が実行される
   // (id) ＝ 上記で取得した商品ごとのpath → 「docの中のdata」にpathが入っているので、doc.data()
@@ -73,6 +77,18 @@ const ProductDetail = () => {
         setProduct(data)
       })
   }, []);
+
+  useEffect(() => {
+    db.collection("users").doc(uid).collection("favorites").get().then(snapshots => {
+        snapshots.forEach(snapshot => {
+          favoriteList.push(snapshot.data())
+          favoriteList.map(favo =>
+            favorite.push(favo.size));
+        })
+      })
+  }, [favoriteList]);
+
+
 
   //上記の[product,setProduct]が最初のマウント時と変化する度に実行する  カートに入れたい商品の情報を配列にして生成し、addProductToCart()へ渡す関数として、addProducts()を定義
   //selectSize ＝ SizeTable.jsx：IconButton onClick={() => props.addProduct(size.size)} ➡︎ 選択したサイズのカートアイコンをクリックした値(size.sizeのサイズ情報)が入ってくる
@@ -91,20 +107,34 @@ const ProductDetail = () => {
     }))
   }, [product]);
 
+
+  //お気に入りリスト登録-重複する商品はアラートでお知らせ
   const addFavorite = useCallback((selectedSize) => {
-    const timestamp = FirebaseTimestamp.now();
-    dispatch(addProductsToFavorite({
-      added_at: timestamp,
-      description: product.description,
-      gender: product.gender,
-      images: product.images,
-      name: product.name,
-      price: product.price,
-      productId: product.id,
-      quantity: selectedSize.quantity,
-      size: selectedSize.size
-    }))
-  }, [product])
+    let alreadyFavorite = "";
+
+    for (const fav of favorite) {
+      if (fav === selectedSize.size) {
+        alreadyFavorite = fav;
+      }
+    };
+
+    if (alreadyFavorite === selectedSize.size) {
+      alert("この商品とサイズの組み合わせは、既に登録されています。")
+    } else {
+      const timestamp = FirebaseTimestamp.now();
+      dispatch(addProductsToFavorite({
+        added_at: timestamp,
+        description: product.description,
+        gender: product.gender,
+        images: product.images,
+        name: product.name,
+        price: product.price,
+        productId: product.id,
+        quantity: selectedSize.quantity,
+        size: selectedSize.size,
+      }))
+    }
+  }, [product]);
 
   // product.~ ➡︎ productはuseEffectで取得して、productに格納したproductからデータを取り出している
   //toLocaleString() ➡︎ 数字（値段）の3桁区切り点をいれる(,)
